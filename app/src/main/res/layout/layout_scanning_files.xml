@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_below="@id/actionBar"
+    android:layout_centerVertical="true"
+    android:layout_marginTop="@dimen/_50sdp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivScanning"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_150sdp"
+        android:src="@drawable/ic_scanning_photo_lottie" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:text="@string/scanning"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13ssp" />
+
+
+    <com.example.filerecovery.ui.components.CustomProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_25sdp" />
+
+    <TextView
+        android:id="@+id/tvCurrentPath"
+        android:layout_width="@dimen/_210sdp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/open_sans_regular"
+        android:lines="3"
+        android:textSize="@dimen/_9ssp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Storage/emulate/0/pictures/movies/thumbnail/2505005.jpg"/>
+
+
+    <LinearLayout
+        android:id="@+id/llPremiumCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="@dimen/_15sdp"
+        android:paddingVertical="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@drawable/photo_card_premium_bg">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:textSize="@dimen/_12ssp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="@string/tried_of_waiting_x3_faster_with_pro"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/ic_speed_up_banner">
+
+            <ImageView
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/ic_crown"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/speed_up_now"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

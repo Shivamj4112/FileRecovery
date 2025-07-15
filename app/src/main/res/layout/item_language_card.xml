@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/_15sdp"
+    android:paddingVertical="@dimen/_12sdp"
+    android:background="@drawable/language_card_selected"
+    android:layout_marginBottom="@dimen/_10sdp">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_medium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:text="@string/defualt"/>
+
+        <TextView
+            android:id="@+id/tvSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:fontFamily="@font/open_sans_medium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            android:text="@string/system_language"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivSelected"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_selected_done"/>
+
+</LinearLayout>

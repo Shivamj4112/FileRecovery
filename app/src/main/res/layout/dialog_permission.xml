@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:clipToOutline="true"
+    android:background="@drawable/corner_rounded_card">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_permission" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="@string/permission_is_require_to_access"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_30sdp"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/please_allow_access_to_manage_all_files_otherwise_the_app_can_not_scan_and_restore_any_data_on_the_device"
+        android:textAlignment="center"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/_11ssp" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btAllow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/photos_storage_color"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:text="@string/allow_permission"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp" />
+
+
+</LinearLayout>

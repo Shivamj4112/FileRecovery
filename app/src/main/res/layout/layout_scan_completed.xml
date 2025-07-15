@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:paddingTop="@dimen/_40sdp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:src="@drawable/ic_scan_completed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textSize="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/black"
+        android:text="@string/scan_completed"/>
+
+    <TextView
+        android:id="@+id/tvFilesFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_medium"
+        android:textSize="@dimen/_16ssp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Found 1024 photos recovery"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btViewFiles"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        app:backgroundTint="@color/photos_storage_color"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/white"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:text="@string/view"/>
+
+</LinearLayout>

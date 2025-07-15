@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.activity.ProgressActivity">
+
+    <RelativeLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/ivArrowBack"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_arrow_back" />
+
+
+        <ImageView
+            android:id="@+id/ivHome"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_home" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/actionBar"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_140sdp"
+            android:src="@drawable/ic_scan_completed" />
+
+        <TextView
+            android:id="@+id/tvfileSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/recovered_successful"
+            android:gravity="center_horizontal"
+            android:textColor="@color/photos_storage_color"
+            android:textSize="@dimen/_15ssp" />
+
+        <TextView
+            android:id="@+id/tvFilesFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/open_sans_medium"
+            android:gravity="center_horizontal"
+            android:text="@string/has_been_save_to_the_device"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/_13ssp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_40sdp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btContinue"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="@string/continue_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="@color/selection_card_background" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btViewFiles"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="@string/view"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="@color/photos_storage_color" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/llProgressLayout"
+        android:visibility="gone"
+        layout="@layout/layout_progress"/>
+
+</RelativeLayout>

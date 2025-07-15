@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/_30sdp"
+    android:paddingVertical="@dimen/_20sdp"
+    android:background="@drawable/card_background_white_rounded"
+    android:backgroundTint="@color/blue_stroke">
+
+    <ImageView
+        android:id="@+id/ivLoading"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"/>
+
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textColor="@color/white"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:textSize="@dimen/_16ssp"
+        android:text="@string/please_wait"/>
+
+</LinearLayout>

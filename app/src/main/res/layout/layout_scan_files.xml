@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/actionBar"
+    android:layout_centerVertical="true"
+    android:layout_marginTop="@dimen/_50sdp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivScanDisclaimer"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_150sdp"
+        android:src="@drawable/ic_scan_photo" />
+
+    <TextView
+        android:id="@+id/tvScanDisclaimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="@string/tap_to_scan_photos"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15ssp" />
+
+</LinearLayout>

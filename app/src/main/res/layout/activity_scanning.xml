@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/photos_storage_color"
+    tools:context=".ui.activity.ScanningActivity">
+
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/photos_storage_color"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/ivArrowBack"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/white" />
+
+
+    </LinearLayout>
+
+
+    <include
+        android:id="@+id/llScanFiles"
+        layout="@layout/layout_scan_files"
+        />
+
+    <include
+        android:id="@+id/llScanning"
+        layout="@layout/layout_scanning_files"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/llScanComplete"
+        layout="@layout/layout_scan_completed"
+        android:visibility="gone"/>
+
+
+
+
+</RelativeLayout>

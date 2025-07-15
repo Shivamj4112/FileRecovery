@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:clipToOutline="true"
+    android:background="@drawable/corner_rounded_card">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:src="@drawable/ic_delete_banner"
+        android:scaleType="centerCrop"/>
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:text="@string/delete_this_file"/>
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="@dimen/_260sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:fontFamily="@font/open_sans_medium"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/dark_gray"
+        android:textAlignment="center"
+        android:text="@string/this_files_will_be_completely_deleted_and_cannot_be_recovered"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btCancel"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/selection_card_background"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/cancel"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btDelete"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/photos_storage_color"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/delete"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+</LinearLayout>

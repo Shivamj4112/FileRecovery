@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.CapacityActivity"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/ivArrowBack"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_arrow_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/capacity"/>
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_8sdp"
+                android:background="@drawable/card_background_white_rounded"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp">
+
+                    <com.example.filerecovery.ui.components.MultiSegmentArcProgressBar
+                        android:id="@+id/pbStorageInfo"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="match_parent"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:paddingVertical="@dimen/_15sdp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvUsedStorage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/open_sans_semi_bold"
+                            android:textSize="@dimen/_18ssp"
+                            android:text="65GB"/>
+
+                        <TextView
+                            android:id="@+id/tvTotalStorage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_gray"
+                            android:fontFamily="@font/open_sans_semi_bold"
+                            android:textSize="@dimen/_11ssp"
+                            android:text="used of 128GB"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center">
+
+                        <View
+                            android:layout_width="@dimen/_7sdp"
+                            android:layout_height="@dimen/_7sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:background="@drawable/card_background_white_rounded"
+                            android:backgroundTint="@color/photos_storage_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/photo"
+                            android:textSize="@dimen/_9ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <View
+                            android:layout_width="@dimen/_7sdp"
+                            android:layout_height="@dimen/_7sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:background="@drawable/card_background_white_rounded"
+                            android:backgroundTint="@color/videos_storage_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/video"
+                            android:textSize="@dimen/_9ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <View
+                            android:layout_width="@dimen/_7sdp"
+                            android:layout_height="@dimen/_7sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:background="@drawable/card_background_white_rounded"
+                            android:backgroundTint="@color/audio_storage_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/audio"
+                            android:textSize="@dimen/_9ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <View
+                            android:layout_width="@dimen/_7sdp"
+                            android:layout_height="@dimen/_7sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:background="@drawable/card_background_white_rounded"
+                            android:backgroundTint="@color/document_storage_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/document"
+                            android:textSize="@dimen/_9ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <View
+                            android:layout_width="@dimen/_7sdp"
+                            android:layout_height="@dimen/_7sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:background="@drawable/card_background_white_rounded"
+                            android:backgroundTint="@color/other_storage_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/other"
+                            android:textSize="@dimen/_9ssp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:background="@drawable/card_background_white_rounded">
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/ic_photos"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/photos"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/open_sans_semi_bold"
+                        android:textColor="@color/black"/>
+
+                    <com.example.filerecovery.ui.components.MultiSegmentProgressBar
+                        android:id="@+id/progressPhotos"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_7sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvPhotosCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1024 files"
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:textColor="@color/dark_gray"/>
+
+
+                        <TextView
+                            android:id="@+id/tvPhotosStorage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_7_gb"
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:textColor="@color/dark_gray"/>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:background="@drawable/card_background_white_rounded">
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/ic_videos"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/videos"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/open_sans_semi_bold"
+                        android:textColor="@color/black"/>
+
+                    <com.example.filerecovery.ui.components.MultiSegmentProgressBar
+                        android:id="@+id/progressVideos"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_7sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvVideosCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_1024_files"
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:textColor="@color/dark_gray"/>
+
+
+                        <TextView
+                            android:id="@+id/tvVideosStorage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_7_gb"
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:textColor="@color/dark_gray"/>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/card_background_white_rounded">
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_audios"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/audios"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/open_sans_semi_bold"
+                    android:textColor="@color/black"/>
+
+                <com.example.filerecovery.ui.components.MultiSegmentProgressBar
+                    android:id="@+id/progressAudios"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_7sdp"
+                    android:layout_marginVertical="@dimen/_4sdp"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvAudiosCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_1024_files"
+                        android:textSize="@dimen/_10ssp"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/open_sans_medium"
+                        android:textColor="@color/dark_gray"/>
+
+
+                    <TextView
+                        android:id="@+id/tvAudioStorage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_7_gb"
+                        android:textSize="@dimen/_10ssp"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/open_sans_medium"
+                        android:textColor="@color/dark_gray"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/card_background_white_rounded">
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_documents"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/documents"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/open_sans_semi_bold"
+                    android:textColor="@color/black"/>
+
+                <com.example.filerecovery.ui.components.MultiSegmentProgressBar
+                    android:id="@+id/progressDocuments"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_7sdp"
+                    android:layout_marginVertical="@dimen/_4sdp"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvDocumentCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_1024_files"
+                        android:textSize="@dimen/_10ssp"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/open_sans_medium"
+                        android:textColor="@color/dark_gray"/>
+
+
+                    <TextView
+                        android:id="@+id/tvDocumentsStorage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_7_gb"
+                        android:textSize="@dimen/_10ssp"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/open_sans_medium"
+                        android:textColor="@color/dark_gray"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:background="@drawable/card_background_white_rounded">
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/ic_recovered_files"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/other"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/open_sans_semi_bold"
+                        android:textColor="@color/black"/>
+
+                    <com.example.filerecovery.ui.components.MultiSegmentProgressBar
+                        android:id="@+id/progressOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_7sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvOtherCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_1024_files"
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:textColor="@color/dark_gray"/>
+
+
+                        <TextView
+                            android:id="@+id/tvOtherStorage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_7_gb"
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:textColor="@color/dark_gray"/>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

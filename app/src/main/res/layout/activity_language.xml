@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.activity.LanguageActivity">
+
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/ivArrowBack"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:visibility="gone"
+            android:src="@drawable/ic_arrow_back"/>
+
+        <TextView
+            android:id="@+id/languageSelectionTitle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/choose_language"/>
+
+
+        <ImageView
+            android:id="@+id/ivDone"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:background="@drawable/corner_rounded_card"
+            android:padding="@dimen/_2sdp"
+            android:backgroundTint="@color/photos_storage_color"
+            android:src="@drawable/ic_done"/>
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBar"
+        android:paddingVertical="@dimen/_10sdp"
+        tools:listitem="@layout/item_language_card"
+        android:paddingHorizontal="@dimen/_10sdp"/>
+
+</RelativeLayout>

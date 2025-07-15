@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background for total capacity (128GB) -->
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="@color/gray" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+
+    <item android:id="@+id/photos_progress">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="left">
+            <shape>
+                <solid android:color="@color/photos_storage_color" />
+                <corners android:radius="4dp" />
+            </shape>
+        </clip>
+    </item>
+
+    <item android:id="@+id/videos_progress">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="left">
+            <shape>
+                <solid android:color="@color/videos_storage_color" />
+                <corners android:radius="4dp" />
+            </shape>
+        </clip>
+    </item>
+
+    <item android:id="@+id/other_progress">
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="left">
+            <shape>
+                <solid android:color="@color/other_storage_color" />
+                <corners android:radius="4dp" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

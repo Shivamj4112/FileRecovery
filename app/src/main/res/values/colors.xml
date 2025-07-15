@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="blackish">#1E1E1E</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray_stroke">#EFF0F1</color>
+    <color name="blue_stroke">#88C8FE</color>
+    <color name="background">#FBFDFF</color>
+    <color name="selection_card_background">#F7F7F7</color>
+    <color name="gray">#F3F3F3</color>
+    <color name="dark_gray">#6C747A</color>
+    <color name="text_gray">#A0A7AB</color>
+    <color name="progress_background">#D9D9D9</color>
+    <color name="progress_bar_background">#F3F3F3</color>
+    <color name="light_blue">#EBF6FD</color>
+    <color name="white_transparent">#33F7F7F7</color>
+    <color name="black_transparent">#59000000</color>
+    <color name="photos_storage_color">#2196F3</color>
+    <color name="videos_storage_color">#FA5F5F</color>
+    <color name="audio_storage_color">#52B36A</color>
+    <color name="document_storage_color">#9333EA</color>
+    <color name="other_storage_color">#F3B82B</color>
+    <color name="light_photo_color">#90CAF9</color>
+</resources>

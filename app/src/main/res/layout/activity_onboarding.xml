@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activity.OnboardingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/dots_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:dotsColor="@color/text_gray"
+                android:layout_gravity="center_horizontal"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="@dimen/_5sdp"
+                app:dotsSpacing="@dimen/_2sdp"
+                app:dotsWidthFactor="2.5"
+                app:progressMode="false"
+                app:selectedDotColor="@color/photos_storage_color" />
+
+
+            <TextView
+                android:id="@+id/tvonBoarding"
+                android:layout_width="@dimen/_230sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/_16ssp"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal|bottom"
+                android:lines="2"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="@string/recover_all_deleted_photos_and_videos"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:backgroundTint="@color/photos_storage_color"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="@string/next"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.activity.RecoveredFilesActivity">
+
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/ivArrowBack"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/recovered_files"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15ssp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvPhotos"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_background_white_rounded"
+                    android:backgroundTint="@color/photos_storage_color"
+                    android:fontFamily="@font/open_sans_semi_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:text="@string/photos"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <View
+                    android:layout_width="@dimen/_6sdp"
+                    android:layout_height="@dimen/_1sdp" />
+
+                <TextView
+                    android:id="@+id/tvVideos"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_background_white_rounded"
+                    android:backgroundTint="@color/selection_card_background"
+                    android:fontFamily="@font/open_sans_semi_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:text="@string/videos"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="@dimen/_10ssp" />
+
+                <View
+                    android:layout_width="@dimen/_6sdp"
+                    android:layout_height="@dimen/_1sdp" />
+
+
+                <TextView
+                    android:id="@+id/tvAudios"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_background_white_rounded"
+                    android:backgroundTint="@color/selection_card_background"
+                    android:fontFamily="@font/open_sans_semi_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:text="@string/audios"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="@dimen/_10ssp" />
+
+                <View
+                    android:layout_width="@dimen/_6sdp"
+                    android:layout_height="@dimen/_1sdp" />
+
+
+                <TextView
+                    android:id="@+id/tvDocuments"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.3"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_background_white_rounded"
+                    android:backgroundTint="@color/selection_card_background"
+                    android:fontFamily="@font/open_sans_semi_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_13sdp"
+                    android:text="@string/documents"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="@dimen/_10ssp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_info" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:text="@string/please_do_not_uninstall_this_file_recovery_to_avoid_file_loss"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="@dimen/_9ssp" />
+
+            </LinearLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btDeleteAll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:text="@string/delete_size"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:visibility="gone"
+                app:backgroundTint="@color/photos_storage_color" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llEmptyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivEmpty"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:src="@drawable/ic_empty_photos" />
+
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_medium"
+                android:text="@string/no_photo_found_for_recovered"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/_13ssp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btRescan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/scan_deleted_photos"
+                android:textSize="@dimen/_13ssp"
+                app:backgroundTint="@color/photos_storage_color" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

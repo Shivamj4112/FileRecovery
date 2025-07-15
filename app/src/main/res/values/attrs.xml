@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MultiColorProgressBar">
+        <attr name="progressBlue" format="float" />
+        <attr name="progressRed" format="float" />
+        <attr name="progressYellow" format="float" />
+    </declare-styleable>
+</resources>
