@@ -1,5 +1,6 @@
 package com.example.filerecovery.ui.activity
 
+import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
 import android.os.Build
@@ -8,6 +9,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.filerecovery.R
+import com.example.filerecovery.data.datasource.TopHeaderListener
 import com.example.filerecovery.data.model.DateGroup
 import com.example.filerecovery.data.model.FileItem
 import com.example.filerecovery.data.model.FileListItem
@@ -51,8 +55,24 @@ class FileDetailsActivity : BaseActivity() {
         FilterBottomSheetDialog.DurationOption.ALL_DURATIONS
     private var currentSize: FilterBottomSheetDialog.SizeOption =
         FilterBottomSheetDialog.SizeOption.ALL_SIZES
-    private val pageSize = 10
 
+    private val previewResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            val deletedFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                data?.getParcelableExtra("deletedFile", FileItem::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                data?.getParcelableExtra("deletedFile")
+            }
+            deletedFile?.let { fileItem ->
+                originalFiles = originalFiles.filter { it != fileItem }
+                updateFileList(intent.getStringExtra("fileType")!!)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,54 +122,15 @@ class FileDetailsActivity : BaseActivity() {
             ivArrowBack.setOnClickListener { finish() }
 
             tvTitleName.text = getString(R.string.category_recovery, categoryName)
-
-            val fileCount = fileCount?.toInt() ?: 0
-            val titleText = getString(R.string.found_file_count, categoryName, fileCount.toString())
-            tvFileCount.text = this@FileDetailsActivity.highlightNumber(
-                titleText,
-                fileCount,
-                textColor = R.color.black
-            )
-
-            tvSubTitle.text = getString(R.string.if_the_is_missing_rescan, categoryName.lowercase())
-
-            ivFilter.setOnClickListener {
-                showFilterBottomSheet(fileType)
-            }
             btRecover.setOnClickListener { recoverSelectedFiles(fileType) }
-            ivSelectAll.setOnClickListener { toggleSelectAll() }
-            llRescan.setOnClickListener { rescanFiles(fileType) }
             updateRecoverButtonVisibility(emptySet())
         }
 
         originalFiles = category?.files!!
         setupRecyclerView(fileType.toString())
-        updateSelectAllCheckbox()
         updateFileList(fileType)
-        val dialog = DialogUtil.showLoadingDialog(this)
-        observeViewModel(category, fileType, dialog)
+        observeViewModel(category, fileType)
 
-        binding.rvDocuments.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as? GridLayoutManager
-                layoutManager?.let {
-                    val lastVisiblePosition = it.findLastVisibleItemPosition()
-                    for (i in lastVisiblePosition + 1..lastVisiblePosition + 5) {
-                        if (i < adapter.itemCount) {
-                            val item = adapter.getItemAtPosition(i)
-                            if (item is FileListItem.File && (fileType == FileType.Photos.toString() || fileType == FileType.Videos.toString())) {
-                                Glide.with(this@FileDetailsActivity)
-                                    .load(item.fileItem.path)
-                                    .thumbnail(0.25f)
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .preload()
-                            }
-                        }
-                    }
-                }
-            }
-        })
     }
 
     override fun onPause() {
@@ -162,58 +143,20 @@ class FileDetailsActivity : BaseActivity() {
         Glide.with(this).resumeRequests()
     }
 
-    private fun observeViewModel(category: RecoveryCategory, fileType: String, dialog: Dialog) {
-        val categoryName = getFileTypeName(fileType)
-
+    private fun observeViewModel(category: RecoveryCategory, fileType: String) {
         fileRecoveryModel.scanProgress.observe(this@FileDetailsActivity) { progress ->
             lifecycleScope.launch(Dispatchers.Main) {
-                binding.llRescan.visibility = View.GONE
-                val selectedFiles =
-                    progress.photoCategories.filter { it.categoryName == category.categoryName }
-
-                val fileCount = selectedFiles.size
-                val titleText =
-                    getString(R.string.found_file_count, categoryName, fileCount.toString())
-                binding.tvFileCount.text = this@FileDetailsActivity.highlightNumber(
-                    titleText,
-                    fileCount,
-                    textColor = R.color.black
-                )
             }
         }
 
         fileRecoveryModel.filesCategories.observe(this@FileDetailsActivity) { categories ->
             lifecycleScope.launch(Dispatchers.Main) {
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 6000)
-
-                binding.llRescan.visibility = View.VISIBLE
                 val updatedCategory = categories.find { it.categoryName == category.categoryName }
 
-                if (updatedCategory != null) {
-                    originalFiles = updatedCategory.files
-                    updateFileList(fileType)
+                originalFiles = updatedCategory?.files ?: emptyList()
+                updateFileList(fileType)
 
-                    val fileCount = originalFiles.size
-                    val titleText =
-                        getString(R.string.found_file_count, categoryName, fileCount.toString())
-                    binding.tvFileCount.text = this@FileDetailsActivity.highlightNumber(
-                        titleText,
-                        fileCount,
-                        textColor = R.color.black
-                    )
-                } else {
-                    originalFiles = emptyList()
-                    updateFileList(fileType)
-
-                    val titleText = getString(R.string.found_file_count, categoryName, "0")
-                    binding.tvFileCount.text = this@FileDetailsActivity.highlightNumber(
-                        titleText,
-                        0,
-                        textColor = R.color.black
-                    )
-                }
+                adapter.setScanningState(false)
             }
         }
     }
@@ -235,21 +178,34 @@ class FileDetailsActivity : BaseActivity() {
             fileType = fileType,
             isDateGrouped = isDateGrouped(),
             onItemClick = {
-                startActivity(Intent(this, PreviewActivity::class.java).putExtra("fileItem", it))
+                val intent = Intent(this, PreviewActivity::class.java).putExtra("fileItem", it)
+                previewResultLauncher.launch(intent)
             },
             onSelectionChanged = { selectedFiles ->
                 binding.updateRecoverButtonVisibility(selectedFiles)
-                updateSelectAllCheckbox()
+            },
+            topHeaderListener = object : TopHeaderListener {
+                override fun onSelectAllClicked() {
+                    toggleSelectAll()
+                }
+
+                override fun onRescanClicked() {
+                    rescanFiles(fileType)
+                }
+
+                override fun onFilterClicked() {
+                    showFilterBottomSheet(fileType)
+                }
             }
         )
 
-        binding.rvDocuments.layoutManager = when (fileType) {
+        binding.rvPhotos.layoutManager = when (fileType) {
             FileType.Photos.toString(), FileType.Videos.toString() -> {
                 val gridLayoutManager = GridLayoutManager(this, 3)
                 gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         return when (adapter.getItemViewType(position)) {
-                            FileDetailsAdapter.VIEW_TYPE_HEADER -> 3
+                            FileDetailsAdapter.VIEW_TYPE_HEADER, FileDetailsAdapter.VIEW_TYPE_TOP_HEADER  -> 3
                             else -> 1
                         }
                     }
@@ -260,9 +216,10 @@ class FileDetailsActivity : BaseActivity() {
             else -> LinearLayoutManager(this)
         }
 
-        binding.rvDocuments.adapter = adapter
 
-        binding.rvDocuments.setRecycledViewPool(RecyclerView.RecycledViewPool().apply {
+        binding.rvPhotos.adapter = adapter
+
+        binding.rvPhotos.setRecycledViewPool(RecyclerView.RecycledViewPool().apply {
             setMaxRecycledViews(FileDetailsAdapter.VIEW_TYPE_HEADER, 10)
             setMaxRecycledViews(FileDetailsAdapter.VIEW_TYPE_PHOTO_VIDEO, 30)
             setMaxRecycledViews(FileDetailsAdapter.VIEW_TYPE_AUDIO_DOCUMENT, 30)
@@ -278,15 +235,6 @@ class FileDetailsActivity : BaseActivity() {
         val allSelected = adapter.getSelectedFiles().size == originalFiles.size
         adapter.toggleSelectAll(!allSelected)
         binding.updateRecoverButtonVisibility(adapter.getSelectedFiles())
-        updateSelectAllCheckbox()
-    }
-
-    private fun updateSelectAllCheckbox() {
-        val allSelected =
-            adapter.getSelectedFiles().size == originalFiles.size && originalFiles.isNotEmpty()
-        binding.ivSelectAll.setImageResource(
-            if (allSelected) R.drawable.ic_tick_selected else R.drawable.ic_tick_unselected_gray
-        )
     }
 
     private fun recoverSelectedFiles(fileType: String) {
@@ -299,7 +247,6 @@ class FileDetailsActivity : BaseActivity() {
         startActivity(intent)
         adapter.clearSelections()
         binding.updateRecoverButtonVisibility(emptySet())
-        updateSelectAllCheckbox()
         showToast(getString(R.string.file_recovered_successfully))
     }
 
@@ -317,8 +264,6 @@ class FileDetailsActivity : BaseActivity() {
 
             withContext(Dispatchers.Main) {
                 adapter.updateData(dateGroups, isDateGrouped())
-                binding.rvDocuments.visibility =
-                    if (sortedFiles.isEmpty()) View.GONE else View.VISIBLE
                 binding.llEmptyLayout.visibility =
                     if (sortedFiles.isEmpty()) View.VISIBLE else View.GONE
 //                binding.progressBarContent.visibility = View.GONE

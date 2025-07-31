@@ -75,9 +75,7 @@ class FileAdapter(
                         if (index < files.size) {
                             Glide.with(context)
                                 .load(files[index].path)
-                                .thumbnail(0.25f) // Load smaller thumbnails
                                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                                .override(100, 100) // Resize to reduce memory usage
                                 .into(imageView.ivImage)
                             imageView.root.visibility = View.VISIBLE
                             imageView.ivPlay.visibility = if (fileType == FileType.Videos.toString()) {

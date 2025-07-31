@@ -87,7 +87,7 @@ class VcfContactsActivity : AppCompatActivity() {
                 binding.btnRecover.isEnabled = false
                 binding.ivSelectAll.isEnabled = false
             } else {
-                contactsAdapter.setContacts(contacts)
+                contactsAdapter.setContacts(contacts,"backup")
                 binding.rvContacts.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
                 binding.btnRecover.isEnabled = true

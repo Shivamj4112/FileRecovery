@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.filerecovery.R
@@ -98,8 +99,6 @@ class ScanningActivity : BaseActivity() {
                 llScanning.progressBar.setProgress(0)
 
                 fileRecoveryModel.scanDeletedFiles(fileType)
-                fileRecoveryModel.loadAlbums()
-
 
                 isScanning = true
             }
@@ -111,50 +110,59 @@ class ScanningActivity : BaseActivity() {
             binding.llScanning.progressBar.setProgress(progress.progress)
         }
 
-        fileRecoveryModel.files.observe(this) { files ->
-            val elapsedTime = System.currentTimeMillis() - scanStartTime
-            val remainingTime = MIN_SCAN_TIME_MS - elapsedTime
-
-            if (remainingTime > 0) {
-                lifecycleScope.launch {
-                    delay(remainingTime)
-                    binding.showScanComplete(files.size, fileType)
-                }
+        val mediator = MediatorLiveData<Pair<Boolean?, List<FileItem>?>>().apply {
+            addSource(fileRecoveryModel.isLoading) { isLoading ->
+                value = Pair(isLoading, fileRecoveryModel.files.value)
             }
-        }
-        fileRecoveryModel.files.observe(this) { files ->
-            val elapsedTime = System.currentTimeMillis() - scanStartTime
-            val remainingTime = MIN_SCAN_TIME_MS - elapsedTime
-
-            if (remainingTime > 0) {
-                lifecycleScope.launch {
-                    delay(remainingTime)
-                    binding.showScanComplete(files.size, fileType)
-                    isScanning = false
-                }
+            addSource(fileRecoveryModel.files) { files ->
+                value = Pair(fileRecoveryModel.isLoading.value, files)
             }
         }
 
-        fileRecoveryModel.isLoading.observe(this) { isLoading ->
-            if (!isLoading && isScanning) {
+        mediator.observe(this) { (isLoading, files) ->
+            if (!isLoading!! && isScanning && files != null) {
                 val elapsedTime = System.currentTimeMillis() - scanStartTime
-                if (elapsedTime >= MIN_SCAN_TIME_MS) {
-                    binding.showScanComplete(fileRecoveryModel.files.value?.size ?: 0, fileType)
+                val remainingTime = MIN_SCAN_TIME_MS - elapsedTime
+                if (remainingTime > 0) {
+                    lifecycleScope.launch {
+                        delay(remainingTime)
+                        binding.showScanComplete(files.size, fileType)
+                        isScanning = false
+                    }
+                } else {
+                    binding.showScanComplete(files.size, fileType)
                     isScanning = false
                 }
             }
         }
 
-        // Observe errors and show toast
         fileRecoveryModel.error.observe(this) { errorMessage ->
             if (errorMessage != null) {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-                // Restart scanning process
-                binding.root.isClickable = true
-                binding.llScanFiles.root.visibility = View.VISIBLE
-                binding.llScanning.root.visibility = View.GONE
+                // Reset UI to initial scanning state
+                setupInitialUI(fileType)
                 isScanning = false
+                scanStartTime = 0L
             }
+        }
+    }
+//    override fun onResume() {
+//        super.onResume()
+//        // Reset UI when resuming (e.g., returning from FileRecoveryActivity)
+//        val fileType = intent.getStringExtra("fileType")!!
+//        setupInitialUI(fileType)
+//        isScanning = false
+//        scanStartTime = 0L
+//    }
+
+    private fun setupInitialUI(fileType: String) {
+        binding.apply {
+            setupBackground(fileType)
+            setupContent(fileType)
+            llScanFiles.root.visibility = View.VISIBLE
+            llScanning.root.visibility = View.GONE
+            llScanComplete.root.visibility = View.GONE
+            root.isClickable = true
         }
     }
 

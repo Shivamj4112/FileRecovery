@@ -124,9 +124,9 @@ class ContactsListActivity : BaseActivity() {
             else -> getString(R.string.contacts)
         }
 
-        binding.tvFoundedFilesCount.text = getString(R.string.found_contacts, fileCount.toString())
-
-        binding.llFileCount.visibility = if (listType == "backup") View.GONE else View.VISIBLE
+//        binding.tvFoundedFilesCount.text = getString(R.string.found_contacts, fileCount.toString())
+//
+//        binding.llFileCount.visibility = if (listType == "backup") View.GONE else View.VISIBLE
 
         if (listType == "backup") {
             backupFilesAdapter = BackupFilesAdapter(
@@ -183,8 +183,7 @@ class ContactsListActivity : BaseActivity() {
             }
         }
 
-        binding.progressBar.visibility = View.VISIBLE
-        binding.rvContacts.visibility = View.GONE
+        binding.rvContacts.visibility = View.VISIBLE
         binding.llEmptyLayout.visibility = View.GONE
 
         binding.btGoBack.setOnClickListener {
@@ -201,9 +200,9 @@ class ContactsListActivity : BaseActivity() {
                     if (files.isEmpty()) {
                         binding.llEmptyLayout.visibility = View.VISIBLE
                         binding.rvContacts.visibility = View.GONE
-                        binding.progressBar.visibility = View.GONE
                         binding.tvEmpty.text = getString(R.string.no_backup_contacts)
                         binding.llBottomBar.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
                         binding.btnRecover.isEnabled = false
                     } else {
                         backupFilesAdapter.setFiles(files, lifecycleScope)
@@ -214,7 +213,6 @@ class ContactsListActivity : BaseActivity() {
                         binding.btnRecover.isEnabled = true
                     }
                     binding.llBottomBar.visibility = View.GONE
-                    binding.llFileCount.visibility = View.GONE
                 }
             }
 
@@ -225,17 +223,16 @@ class ContactsListActivity : BaseActivity() {
                     if (contacts.isEmpty()) {
                         binding.llEmptyLayout.visibility = View.VISIBLE
                         binding.rvContacts.visibility = View.GONE
-                        binding.progressBar.visibility = View.GONE
                         binding.tvEmpty.text = getString(R.string.no_all_contacts)
+                        binding.progressBar.visibility = View.GONE
                         binding.btnRecover.isEnabled = false
                     } else {
-                        contactsAdapter.setContacts(contacts)
+                        contactsAdapter.setContacts(contacts,listType!!)
                         binding.llEmptyLayout.visibility = View.GONE
-                        binding.rvContacts.visibility = View.VISIBLE
                         binding.progressBar.visibility = View.GONE
+                        binding.rvContacts.visibility = View.VISIBLE
                         binding.btnRecover.isEnabled = true
                     }
-                    binding.tvFoundedFilesCount.text = getString(R.string.found_contacts, contacts.size.toString())
                     updateSelectAllImage()
                 }
             }
@@ -245,18 +242,17 @@ class ContactsListActivity : BaseActivity() {
                     if (contacts.isEmpty()) {
                         binding.llEmptyLayout.visibility = View.VISIBLE
                         binding.rvContacts.visibility = View.GONE
-                        binding.progressBar.visibility = View.GONE
                         binding.tvEmpty.text = getString(R.string.no_deleted_contacts)
+                        binding.progressBar.visibility = View.GONE
                         binding.btnRecover.isEnabled = false
-                        contactsAdapter.setContacts(emptyList())
+                        contactsAdapter.setContacts(emptyList(),listType!!)
                     } else {
-                        contactsAdapter.setContacts(contacts)
+                        contactsAdapter.setContacts(contacts,listType!!)
                         binding.llEmptyLayout.visibility = View.GONE
                         binding.rvContacts.visibility = View.VISIBLE
                         binding.progressBar.visibility = View.GONE
                         binding.btnRecover.isEnabled = true
                     }
-                    binding.tvFoundedFilesCount.text = getString(R.string.found_contacts, contacts.size.toString())
                     updateSelectAllImage()
                 }
             }
@@ -274,8 +270,7 @@ class ContactsListActivity : BaseActivity() {
         }
 
         contactsViewModel.isLoading.observe(this) { isLoading ->
-            binding.progressBar.visibility = if (isLoading == true) View.VISIBLE else View.GONE
-            binding.rvContacts.visibility = if (isLoading == true) View.GONE else View.VISIBLE
+            binding.rvContacts.visibility =  View.VISIBLE
             binding.llEmptyLayout.visibility =
                 if (isLoading == true) View.GONE else binding.llEmptyLayout.visibility
             binding.btnRecover.visibility = if (isLoading == true) View.GONE else View.VISIBLE

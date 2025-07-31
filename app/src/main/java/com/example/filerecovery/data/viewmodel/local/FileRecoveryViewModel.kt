@@ -50,72 +50,41 @@ class FileRecoveryViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    private var showHiddenFiles = false
 
-    fun loadAlbums() {
+    fun scanDeletedFiles(fileType: String) {
         viewModelScope.launch {
-            _isLoading.value = true
+            _files.postValue(emptyList())
+            _filesCategories.postValue(emptyList())
+//            _scanProgress.postValue(ScanProgress( "",0,emptyList()))
             try {
-                val albums = if (showHiddenFiles) {
-                    repository.getHiddenAlbums()
-                } else {
-                    repository.getAllAlbums()
+                _isLoading.value = true
+                val files = repository.scanDeletedFiles(fileType) { progress ->
+                    _scanProgress.postValue(progress)
                 }
-                _albums.value = albums
+                _files.value = files
+
+                val recoveryCategoryMap = mutableMapOf<String, MutableList<FileItem>>()
+                files.forEach { file ->
+                    val parentDir = File(file.path).parentFile?.name ?: "Uncategorized"
+                    recoveryCategoryMap.getOrPut(parentDir) { mutableListOf() }.add(file)
+                }
+                val categories = recoveryCategoryMap.map { (name, files) ->
+                    RecoveryCategory(name, files)
+                }.filter { it.files.isNotEmpty() }
+                _filesCategories.postValue(categories)
             } catch (e: Exception) {
-                _error.value = "Failed to load albums: ${e.message}"
+                Log.e("FileRecoveryViewModel", "Error scanning files: ${e.message}", e)
+                _error.postValue("Failed to scan files: ${e.message}")
+                _files.postValue(emptyList())
+                _filesCategories.postValue(emptyList())
+
             } finally {
                 _isLoading.value = false
             }
+
         }
     }
 
-    // Get all files from the specified directory
-
-    fun scanDeletedFiles(fileType: String, maxRetries: Int = 3) {
-        viewModelScope.launch {
-            var retryCount = 0
-            var success = false
-
-            while (retryCount < maxRetries && !success) {
-                try {
-                    _isLoading.value = true
-                    val files = repository.scanDeletedFiles(fileType) { progress ->
-                        _scanProgress.postValue(progress)
-                    }
-                    _files.value = files
-
-                    val recoveryCategoryMap = mutableMapOf<String, MutableList<FileItem>>()
-                    files.forEach { file ->
-                        val parentDir = File(file.path).parentFile?.name ?: "Uncategorized"
-                        recoveryCategoryMap.getOrPut(parentDir) { mutableListOf() }.add(file)
-                    }
-                    val categories = recoveryCategoryMap.map { (name, files) ->
-                        RecoveryCategory(name, files)
-                    }.filter { it.files.isNotEmpty() }
-                    _filesCategories.postValue(categories ?: emptyList())
-                    success = true
-                } catch (e: Exception) {
-                    retryCount++
-                    Log.e("FileRecoveryViewModel", "Error scanning files (Attempt $retryCount): ${e.message}", e)
-                    if (retryCount == maxRetries) {
-                        _error.postValue("Failed to scan files after $maxRetries attempts: ${e.message}")
-                        _files.postValue(emptyList())
-                    }
-                } finally {
-                    if (retryCount >= maxRetries || success) {
-                        _isLoading.value = false
-                    }
-                }
-            }
-        }
-    }
-
-    fun scanDeletedContacts() {
-        viewModelScope.launch {
-            _contacts.value = repository.scanDeletedContacts()
-        }
-    }
 
     fun recoverFile(fileItem: FileItem) {
         viewModelScope.launch {
@@ -123,14 +92,5 @@ class FileRecoveryViewModel @Inject constructor(
 
         }
     }
-    fun updateCategory(updatedCategory: RecoveryCategory) {
-        val currentCategories = _filesCategories.value?.toMutableList() ?: mutableListOf()
-        val index = currentCategories.indexOfFirst { it.categoryName == updatedCategory.categoryName }
-        if (index != -1) {
-            currentCategories[index] = updatedCategory
-        } else {
-            currentCategories.add(updatedCategory)
-        }
-        _filesCategories.postValue(currentCategories)
-    }
+
 }

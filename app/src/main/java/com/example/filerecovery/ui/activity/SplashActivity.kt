@@ -33,15 +33,12 @@ class SplashActivity : BaseActivity() {
             Handler(Looper.getMainLooper()).postDelayed({
 
                 if (SharedPref.isLanguageScreenShown){
-
                     if (SharedPref.isOnBoardingShown){
-
                         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     }
                     else{
                         startActivity(Intent(this@SplashActivity, OnboardingActivity::class.java))
                     }
-
                 }else{
                     startActivity(Intent(this@SplashActivity, LanguageActivity::class.java))
                 }

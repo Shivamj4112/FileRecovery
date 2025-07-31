@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
     android:paddingBottom="@dimen/_10sdp"
+    android:paddingHorizontal="@dimen/_6sdp"
     android:orientation="vertical">
 
 
@@ -13,7 +13,6 @@
         android:id="@+id/llHeaderLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp"
         android:paddingVertical="@dimen/_2sdp"
         android:gravity="bottom">
 
@@ -51,10 +50,5 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFiles"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_file"/>
 
 </LinearLayout>

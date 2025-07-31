@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rlActionBar"
-        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:layout_marginHorizontal="@dimen/_13sdp"
         android:background="@drawable/card_background_white_rounded"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/_10sdp"
@@ -201,7 +201,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/llStorageInfo"
-        android:padding="@dimen/_14sdp">
+        android:padding="@dimen/_13sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -243,7 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:fontFamily="@font/open_sans_semi_bold"
                         android:text="@string/photos"/>
@@ -269,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:fontFamily="@font/open_sans_semi_bold"
                         android:text="@string/videos"/>
@@ -303,7 +303,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:fontFamily="@font/open_sans_semi_bold"
                         android:text="@string/audios"/>
@@ -329,7 +329,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:fontFamily="@font/open_sans_semi_bold"
                         android:text="@string/documents"/>
@@ -363,7 +363,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:fontFamily="@font/open_sans_semi_bold"
                         android:text="@string/contacts"/>

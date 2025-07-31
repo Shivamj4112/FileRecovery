@@ -55,6 +55,7 @@ object DialogUtil {
 
             btExit.setOnClickListener {
                 onExitClick()
+                dialog.dismiss()
             }
 
             btCancel.setOnClickListener {

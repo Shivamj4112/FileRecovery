@@ -7,12 +7,20 @@
     android:layout_marginBottom="@dimen/_5sdp"
     android:clipToOutline="true"
     android:background="@drawable/card_background_white_rounded">
-    
+
+    <ImageView
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_photos"
+        app:tint="@color/text_gray"
+        android:scaleType="centerCrop"/>
+
+
     <ImageView
         android:id="@+id/ivFilesItem"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_100sdp"
-        android:src="@drawable/ic_launcher_background"
         android:scaleType="centerCrop"/>
 
 
